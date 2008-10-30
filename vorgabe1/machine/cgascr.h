@@ -13,7 +13,7 @@
  * CGA_Screen enables the basic control of the screen of a computer by accessing
  * the screen memory and I/O ports directly.
  */
-class CGA_Screen : DATENREGISTER(0x3d5), INDEXREGISTER(0x3d4), MEMORY(0xb8000) {
+class CGA_Screen  {
  
 public:
 
@@ -49,7 +49,7 @@ public:
    * @param n number auf characters in string
    * @param attrib display attributs
    */
-	void print (char* text, int length, unsigned attrib);
+	void print (char* text, int length, unsigned char attrib);
   /**
    * Method scrollup() scrolls the screen one row up. 
    * The new row at the bottom of the screen has to be empty (filled with spaces).
@@ -57,9 +57,9 @@ public:
 	void scrollup();
 
 protected:
-	const int INDEXREGISTER;
-	const int DATENREGISTER;
-	const char* MEMORY;
+	static const int INDEXREGISTER = 0x3d4;
+	static const int DATENREGISTER = 0x3d5;
+	static char* const MEMORY;
 };
 
 #endif

@@ -8,10 +8,10 @@
  
 #include "machine/cgascr.h"
 #include "machine/io_port.h"
-
+char * const CGA_Screen::MEMORY = (char*)0xb8000;
 void CGA_Screen::show(int x, int y, char c, unsigned char attrib)
 {
-	char* start_ram = MEMORY;
+	char* const start_ram = MEMORY;
 	int offset = (y*80+x)*2;
 	start_ram[offset] = c; // start_ram[offset] = c
 	start_ram[offset + 1] = attrib;
@@ -40,11 +40,25 @@ void CGA_Screen::getpos(int& x, int& y)
 
 void CGA_Screen::print(char* text, int length, unsigned char attrib)
 {
+	int x, y;
+	getpos(x, y);
+	for(int i = 0; i < length; ++i)
+	{
+		if(x > 79) {
+			x = x % 80;
+			if(y == 24)
+				scrollup();
+			else
+				++y;
+		}
+		show(x, y, text[i], attrib);
+		++x;
+	}
 }
 
 void CGA_Screen::scrollup()
 {
-	char* start_ram = MEMORY;
+	char* const start_ram = MEMORY;
 	for(int i = 0; i < 80*24; i++) {	// nochmal drüber nachdenken TODO
 		start_ram[i] = start_ram[i+80];
 	}
