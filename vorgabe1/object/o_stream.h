@@ -10,6 +10,7 @@
 #define __o_stream_include__
 
 #include "object/strbuf.h"
+#include <cstdlib>
 
 /**
  * O_Stream extends the Stringbuffer and contains the definitions of the 
@@ -20,14 +21,12 @@
  * manipulators are defined. These manipulators are used to choose the basis 
  * for display of digits and to print the buffer after an endl.
  */
-class O_Stream   {
+class O_Stream : Stringbuffer  {
 public:
-  /** basis for display of digits eg. 2, 8, 10 or 16 */
-  /* ToDo: insert sourcecode */ 
-
+	enum Base {DEC=1, OCT, HEX};
   /** Default constructor initialising with dezimal system */
-  /* ToDo: insert sourcecode */ 
-
+	O_Stream(Base b=DEC);
+	O_Stream(Base b, size_t size);
   /** 
    * Operator << overloading the default operator. Is used to convert
    * the given datatype into a string that can be printed on an output device.
@@ -39,8 +38,18 @@ public:
    * @return reference to the current O_Stream object.
    */
   O_Stream& operator << (char c);
-  /* ToDo: insert sourcecode */ 
 
+  O_Stream& operator << (unsigned char c);
+  O_Stream& operator << (int n);
+  O_Stream& operator << (unsigned int n);
+  O_Stream& operator << (short n);
+  O_Stream& operator << (unsigned short n);
+  O_Stream& operator << (long n);
+  O_Stream& operator << (unsigned long n);
+  O_Stream& operator << (void* pointer);
+  
+  O_Stream& operator << (const char* const text);
+  
   /**
    * Operator << overloading the default operator is used to call defined 
    * manipulators.
@@ -49,6 +58,8 @@ public:
    * @return reference to the current O_Stream object.
    */
   O_Stream& operator << (O_Stream& (*f) (O_Stream&));
+protected:
+  Base base;
 };
 
 /*---------------------------------------------------------------------------*
@@ -65,13 +76,13 @@ public:
  * output (eg. by choosing a basis for the display of digits).
  */ 
 /** ENDL: prints buffer after adding a newline at the end of the buffer */
- 
+ 	O_Stream& endl(O_Stream& os);
 /** BIN: choose binary basis for display */
- 
+ 	O_Stream& bin(O_Stream& os);
 /** OCT: choose oktale basis for display */
- 
+ 	O_Stream& oct(O_Stream& os);
 /** DEC: choose dezimal basis for display */
- 
+ 	O_Stream& dec(O_Stream& os);
 /** HEX: choose hexadezimal basis for display */
- 
+ 	O_Stream& hex(O_Stream& os);
 #endif

@@ -17,7 +17,7 @@
 # the "wx" display library.
 #=======================================================================
 #config_interface: textconfig
-#config_interface: wx
+config_interface: wx
 
 #=======================================================================
 # DISPLAY_LIBRARY
@@ -74,7 +74,7 @@ display_library: wx
 # now supported, but we still recommend to use the BIOS distributed with
 # Bochs. Now the start address can be calculated from image size.
 #=======================================================================
-romimage: file=/USRDIR/BIOS/BIOS-bochs-latest, address=0xf0000
+romimage: file=/home/tobias/dev/oostubs/bochs/BIOS/BIOS-bochs-latest, address=0xf0000
 #romimage: file=mybios.bin, address=0xfff80000 # 512k at memory top
 #romimage: file=mybios.bin # calculate start address from image size
 
@@ -161,7 +161,7 @@ megs: 32
 # VGAROMIMAGE
 # You now need to load a VGA ROM BIOS into C0000.
 #=======================================================================
-vgaromimage: file=/USRDIR/BIOS/vgabios.bin
+vgaromimage: file=/home/tobias/dev/oostubs/bochs/BIOS/vgabios.bin
 #vgaromimage: file=bios/VGABIOS-elpin-2.40
 #vgaromimage: file=bios/VGABIOS-lgpl-latest-cirrus
 

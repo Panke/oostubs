@@ -8,6 +8,7 @@
 
 #ifndef __strbuf_include__
 #define __strbuf_include__
+#include <cstdlib>
 
 /**
  * Stringbuffer implements a buffer gathering characters that have to be 
@@ -21,18 +22,7 @@
  * 'protected'.
  */
 class Stringbuffer {
-protected:
-  /** buffer containing the characters of the Stringbuffer */
-  /* ToDo: insert sourcecode */ 
-  /** buffer pointer saving the position of the next insertion */
-  /* ToDo: insert sourcecode */ 
-
-  /** Default constructor of Stringbuffer setting the buffer empty. */
-  /* ToDo: insert sourcecode */ 
-
-  /** Default desctructor of Stringbuffer. Nothing has to be done here. */
-  /* ToDo: insert sourcecode */ 
-
+public:
   /** 
    * Method put() inserts a character into the buffer. If the buffer is full 
    * after the insertion the buffer has to be emptied by calling the method 
@@ -40,8 +30,7 @@ protected:
    *
    * @param c character to be inserted into the buffer
    */
-  /* ToDo: insert sourcecode */ 
-
+	virtual void put(char c);	
   /**
    * Method flush() prints the curent content of the buffer. It is called 
    * automaticaly as soon as the buffer is full or manualy if an output is 
@@ -49,7 +38,19 @@ protected:
    * To enalbe the Stringbuffer to work with different output mechanisms the
    * method has to be implemented in a subclass of Stringbuffer.
    */
-  /* ToDo: insert sourcecode */ 
+	virtual void flush() = 0;
+	
+protected:
+  /** buffer containing the characters of the Stringbuffer */
+	char* buffer;
+  /** buffer pointer saving the position of the next insertion */
+	char* end;
+	size_t size;
+  /** Default constructor of Stringbuffer setting the buffer empty. */
+	Stringbuffer(size_t size=128 );
+  /** Default desctructor of Stringbuffer. Nothing has to be done here. */
+	virtual ~Stringbuffer();
+
 };
 
 #endif

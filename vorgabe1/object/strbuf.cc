@@ -8,4 +8,25 @@
 
 #include "object/strbuf.h"
 
-/* ToDo: insert sourcecode */ 
+Stringbuffer::Stringbuffer(size_t size)
+{
+	this->buffer = new char[size];
+	this->end = buffer;
+	this->size = size;
+}
+
+Stringbuffer::~Stringbuffer()
+{
+	delete[] buffer;
+}
+
+void Stringbuffer::put(char c)
+{
+	if(end >= buffer+this->size)
+		this->flush();
+	else {
+		*end = c;
+		++end;
+	}
+}
+
