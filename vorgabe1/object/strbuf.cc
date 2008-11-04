@@ -5,8 +5,13 @@
  *                       S T R I N G B U F F E R                             *
  *                                                                           *
  *---------------------------------------------------------------------------*/
+/*
 
 #include "object/strbuf.h"
+#include <cstddef>
+
+using std::size_t;
+
 
 Stringbuffer::Stringbuffer(size_t size)
 {
@@ -29,4 +34,4 @@ void Stringbuffer::put(char c)
 		++end;
 	}
 }
-
+*/

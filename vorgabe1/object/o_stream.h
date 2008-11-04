@@ -11,6 +11,7 @@
 
 #include "object/strbuf.h"
 #include <cstdlib>
+#include <cstddef>
 
 /**
  * O_Stream extends the Stringbuffer and contains the definitions of the 

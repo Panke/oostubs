@@ -23,9 +23,11 @@ void CGA_Screen::setpos(int x, int y)
 	IO_Port index(INDEXREGISTER);
 	IO_Port data(DATENREGISTER);
 
-	int offset = (80*y+x)*2;
+	//int offset = (80*y+x)*2;
 	index.outb(14); //Register 14: Offset des Cursors
-	data.outb(offset);
+	data.outb(x);
+	index.outb(15);
+	data.outb(y);
 }
 
 void CGA_Screen::getpos(int& x, int& y)
@@ -34,9 +36,9 @@ void CGA_Screen::getpos(int& x, int& y)
 	IO_Port data(DATENREGISTER);
 	
 	index.outb(14);
-	int offset = data.inb();
-	x = (offset/2) % 80;
-	y = (offset/2) / 80;
+	x = data.inb();
+	index.outb(15);
+	y = data.inb();
 }
 
 void CGA_Screen::print(char* text, int length, unsigned char attrib)

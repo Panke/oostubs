@@ -9,6 +9,8 @@
 #ifndef __strbuf_include__
 #define __strbuf_include__
 #include <cstdlib>
+#include <cstddef>
+
 
 /**
  * Stringbuffer implements a buffer gathering characters that have to be 
