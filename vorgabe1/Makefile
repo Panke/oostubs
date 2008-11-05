@@ -82,7 +82,7 @@ OBJPRE = $(addprefix $(OBJDIR)/,$(filter-out _startup.o, $(ASM_OBJECTS)) $(C_OBJ
 
 # Regeln zur Erzeugung der Objektdateien
 CFLAGS   := $(CFLAGS) -fleading-underscore -Wall -I. -fno-exceptions -m32
-CXXFLAGS := $(CXXFLAGS) -fleading-underscore -Wall -I. -fno-rtti -fno-exceptions -m32
+CXXFLAGS := $(CXXFLAGS) -fleading-underscore -Wall -I. -fno-rtti -fno-exceptions -m32 -fno-stack-protector
 
 $(OBJDIR)/%.o : %.c
 	$(CC) -c $(CFLAGS) -o $@ $<

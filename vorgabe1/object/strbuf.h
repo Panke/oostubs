@@ -44,12 +44,12 @@ public:
 	
 protected:
   /** buffer containing the characters of the Stringbuffer */
-	char* buffer;
+	char buffer[256];
   /** buffer pointer saving the position of the next insertion */
 	char* end;
-	size_t size;
+	static const size_t size = 256;
   /** Default constructor of Stringbuffer setting the buffer empty. */
-	Stringbuffer(size_t size=128 );
+	Stringbuffer();
   /** Default desctructor of Stringbuffer. Nothing has to be done here. */
 	virtual ~Stringbuffer();
 
