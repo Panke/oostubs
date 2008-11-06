@@ -18,7 +18,7 @@
  * formats and effects available.
  * CGA_Stream extends the functionality of the classes CGA_Screen and O_Stream.
  */
-class CGA_Stream   {
+class CGA_Stream : O_Stream, CGA_Screen  {
 public:
  
   /**
@@ -26,7 +26,7 @@ public:
    * It is called automaticaly as soon as the buffer is full or manualy 
    * if an output is forced.
    */
-  /* ToDo: insert sourcecode */ 
+	void flush();
 };
 
 #endif

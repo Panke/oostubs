@@ -62,4 +62,15 @@ protected:
 	static char* const MEMORY;
 };
 
+struct TwoBytes {
+	unsigned char low;
+	unsigned char high;
+};
+
+union Short_Bytes {
+	unsigned short position;
+	TwoBytes bytes;
+};
+
+
 #endif

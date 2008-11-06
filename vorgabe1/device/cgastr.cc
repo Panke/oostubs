@@ -8,4 +8,3 @@
 
 #include "device/cgastr.h"
 
-/* ToDo: insert sourcecode */ 
