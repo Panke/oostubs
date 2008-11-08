@@ -15,6 +15,6 @@ int main()
 
 	screen.setpos(4,12);
 	screen.print("MITTE", 5, 15);
-	screen.setpos(79,0);
+	screen.setpos(79,24);
   return 0;
 }
