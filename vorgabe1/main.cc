@@ -1,20 +1,10 @@
-#include "machine/cgascr.h"
+//#include "machine/cgascr.h"
+#include "device/cgastr.h"
 
 int main() 
 {
-	CGA_Screen screen;
-	for(int y=0; y<25; ++y)
-	for(int x=0; x<80; ++x)
-		screen.show(x,y,' ',15);
+	CGA_Stream kout;
+	kout << "Lorem Ipsum" << endl;
 
-	screen.setpos(1,0);
-	screen.print("TEST", 4, 15);	
-	
-	screen.setpos(0,2);
-	screen.print("HALLO", 5, 15);
-
-	screen.setpos(4,12);
-	screen.print("MITTE", 5, 15);
-	screen.setpos(79,24);
   return 0;
 }

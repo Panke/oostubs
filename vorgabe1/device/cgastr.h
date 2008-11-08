@@ -18,7 +18,7 @@
  * formats and effects available.
  * CGA_Stream extends the functionality of the classes CGA_Screen and O_Stream.
  */
-class CGA_Stream : O_Stream, CGA_Screen  {
+class CGA_Stream : public O_Stream, CGA_Screen  {
 public:
  
   /**
@@ -27,6 +27,8 @@ public:
    * if an output is forced.
    */
 	void flush();
+	//Konstruktor zum Bildschirm löschen und Zieger auf 0,0 setzen
+	CGA_Stream();
 };
 
 #endif
