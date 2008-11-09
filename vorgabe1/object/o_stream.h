@@ -48,7 +48,7 @@ public:
 
   O_Stream& operator << (void* pointer);
   
-  O_Stream& operator << (const char* const text);
+  O_Stream& operator << (const char* text);
   
   /**
    * Operator << overloading the default operator is used to call defined 

@@ -47,6 +47,5 @@ void CGA_Stream::flush()
 
 		start++;	
 	}
-
-
+	end = buffer;
 }

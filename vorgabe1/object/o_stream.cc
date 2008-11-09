@@ -113,10 +113,14 @@ O_Stream& O_Stream::operator<<(void* pointer)
 	this->base = tmp;
 	return *this; 
 }
-//Methode/Funktion ist nicht Vollständig
-//TODO Fetig machen
-O_Stream& operator << (const char* const text)
+
+O_Stream& O_Stream::operator<<(const char* text)
 {
+	while(*text != '\0')
+	{
+		this->put(*text);
+		text++;
+	}
 	return *this;
 }
 
