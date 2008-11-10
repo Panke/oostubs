@@ -142,7 +142,6 @@ bool Keyboard_Controller::key_decoded () {
   else
     return false;
 }
-
 /**
  * Determins the ASCII code of a key using the scancode and modifier bits.
  */
@@ -176,6 +175,8 @@ void Keyboard_Controller::get_ascii_code () {
 
 /* PUBLIC METHODS */
 Keyboard_Controller::Keyboard_Controller () : ctrl_port (0x64), data_port (0x60) {
+	//Leds initialisieren
+	leds = 0;
   // switch all LEDs off (some PCs switch LEDs on)
   set_led (led::caps_lock, false);
   set_led (led::scroll_lock, false);
@@ -206,13 +207,49 @@ void Keyboard_Controller::reboot () {
 }
 
 void Keyboard_Controller::set_repeat_rate (int speed, int delay) {
-   
-  /* ToDo: insert sourcecode */ 
-   
+	int status;
+	unsigned int outb_rr = delay;
+	outb_rr << 5;
+	outb_rr += speed;
+
+	do {
+		status = ctrl_port.inb();
+	}while((status & inpb) != 0);
+	data_port.outb(kbd_cmd::set_speed);
+	do{
+		status = ctrl_port.inb();
+	}while((status & inpb) != 0);
+	do{
+		status = data_port.inb();
+	}while((status & kbd_reply::ack) != 0);
+
+	data_port.outb(outb_rr);
+
 }
 
 void Keyboard_Controller::set_led (char led, bool on) {
-   
-  /* ToDo: insert sourcecode */ 
-   
-}
+	int status;
+
+	do {
+		status = ctrl_port.inb();
+	}while((status & inpb) != 0);
+
+	data_port.outb(kbd_cmd::set_led);
+	
+	do{
+		status = ctrl_port.inb();
+	}while((status & inpb) != 0);
+
+	do{
+		status = data_port.inb();
+	}while((status & kbd_reply::ack) != 0);
+
+	if(on)
+	{
+		leds |= led;
+	}else{
+		leds &= ~led;
+	}
+
+	data_port.outb(leds);
+} 

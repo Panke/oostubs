@@ -23,11 +23,12 @@ Stringbuffer::~Stringbuffer()
 
 void Stringbuffer::put(char c)
 {
-	if(end >= buffer+size)
+	if(end >= buffer+size){
 		this->flush();
-	else {
-		*end = c;
-		++end;
+		end = buffer;
 	}
+	
+	*end = c;
+	++end;
 }
 
