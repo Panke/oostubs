@@ -23,16 +23,17 @@ void CGA_Stream::flush()
 	char* start=buffer;
 	char* zeiger=buffer;
 	int x,y;
+	char out;
 	while(start != end)
 	{
 
-		char out = *start; 
+		out = *start; 
 		
 
 		if(out == '\n')
 		{
 			int dif = ((int) start) - ((int) zeiger);
-			print(zeiger,dif,15);
+			print(zeiger,start - zeiger,15);
 			getpos(x,y);
 			x = 0;
 			y++;
@@ -47,5 +48,7 @@ void CGA_Stream::flush()
 
 		start++;	
 	}
+	if(out != '\n')
+		print(zeiger,(end-zeiger),15);
 	end = buffer;
 }

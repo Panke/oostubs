@@ -187,9 +187,16 @@ Keyboard_Controller::Keyboard_Controller () : ctrl_port (0x64), data_port (0x60)
 }
 
 Key Keyboard_Controller::key_hit () {
-  Key invalid;                      // invalid default key
-   
-  /* ToDo: insert sourcecode */ 
+  	Key invalid;                      // invalid default key
+ 	int status;
+	do{
+		status = ctrl_port.inb();
+	}while( (status & outb) == 0 );
+	
+	code = data_port.inb();
+	if(key_decoded())
+			return gather;
+	
   return invalid;
 }
 
@@ -218,10 +225,10 @@ void Keyboard_Controller::set_repeat_rate (int speed, int delay) {
 	data_port.outb(kbd_cmd::set_speed);
 	do{
 		status = ctrl_port.inb();
-	}while((status & inpb) != 0);
+	}while((status & outb) == 0);
 	do{
 		status = data_port.inb();
-	}while((status & kbd_reply::ack) != 0);
+	}while((status & kbd_reply::ack) == 0);
 
 	data_port.outb(outb_rr);
 
@@ -242,7 +249,7 @@ void Keyboard_Controller::set_led (char led, bool on) {
 
 	do{
 		status = data_port.inb();
-	}while((status & kbd_reply::ack) != 0);
+	}while((status & kbd_reply::ack) == 0);
 
 	if(on)
 	{
