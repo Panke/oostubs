@@ -1,0 +1,49 @@
+/* $Id: sections,v 1.3 2003/11/12 15:18:07 olaf Exp $ */
+
+SECTIONS 
+ {
+   . = 0x10000;     /* Startadresse des Systems */
+
+   .text :
+    {
+      *(".text")
+      *(".text$")
+      *(".init")
+      *(".fini") 
+      *(".gnu.linkonce.*")
+    }
+
+   .data :
+    {
+      *(".data")
+      *(".data$")
+      *(".rodata")
+      ___CTOR_LIST__ = .;
+      *(".ctors")
+      *(".ctor")
+      ___CTOR_LIST_END__ = .;
+      ___DTOR_LIST__ = .;
+      *(".dtors")
+      *(".dtor")
+      ___DTOR_LIST_END__ = .;
+      *(".got")
+      *(".got.plt")
+      *(".eh_frame")
+      *(".eh_fram")
+      *(".jcr")
+    }
+
+   .bss : 
+    {
+      *(".bss")
+    }
+   /DISCARD/ :
+    {
+      *(".note")
+      *(".comment")
+      *(".debug_line")
+      *(".debug_info")
+      *(".debug_abbrev")
+      *(".debug_aranges")
+    }
+ }
