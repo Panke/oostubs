@@ -46,6 +46,7 @@ int main()
 {
 	CGA_Stream kout;
 	kout << "Start" <<endl;
+	kout << "Dec:" << 585 << " Hex:" << hex << 585 << " Oct:" << oct << 585 << " Bin:" << bin << 585 << endl;
 	Keyboard_Controller keycont;	
 	kout << "Init" <<endl;
 	Key down;

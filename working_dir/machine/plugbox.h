@@ -19,9 +19,18 @@
 class Plugbox {
    
   /** map is an fixed array of pointers to gate objects */
-  /* ToDo: insert sourcecode */ 
+private:
+	// Interruptvektortabelle in das für alle Unterbrechungen ein Gate-Objekt eingetragen werden kann.
+	//
+	// Hier fehlt noch wie das Array initialisiert wird und ob das Array so richtig ist vom Type Gate als Pointer.
+	// TODO Help 
+	Gate *map[64];
+
 public:
-   
+	// Konstanten
+	const unsigned int timer;
+	const unsigned int keyboard;
+
   /**
    * Default constructor of the plugbox initialising the map with default gates.
    */
@@ -35,7 +44,7 @@ public:
    * @param gate reference of the gate object containing the handling routine 
    *             for the interrupt
    */
-  /* ToDo: insert sourcecode */ 
+	void assign(unsigned int slot, Gate& gate);
 
   /**
    * Method report() returns the gate object assigned to a given interrupt
@@ -46,7 +55,9 @@ public:
    *         the given interrupt. If no gate object has been assigned to that 
    *         interrupt number a panic object will be returned.
    */
-  /* ToDo: insert sourcecode */ 
+	Gate& report(unsigned int slot); 
+
+ 
 };
 
 #endif
