@@ -17,22 +17,26 @@ PIC::PIC() : imr_a(0x21), imr_b(0xa1), isr_a(0x20), isr_b(0xa0) {}
 void PIC::allow(PIC::Device dev)
 {
 	// check which pic manages the interrupt
-	IO_Port& p = dev > 128 ? imr_b : imr_a;
 	cpu.enable_int();
-	char old_imr = p.inb();
-	// unset all bits in new_imr, that a set in dev
-	char new_imr = old_imr & (~dev);
-	p.outb(new_imr);
-
+	short pin = 1 << dev;
+	char old_imr = imr_a.inb();
+	old_imr = old_imr & (~pin);
+	imr_a.outb(old_imr);
+	old_imr = imr_b.inb();
+	old_imr = old_imr & (~(pin >> 8));
+	imr_b.outb(old_imr);
 }
 
 
 void PIC::forbid(PIC::Device dev) 
 {
-	IO_Port& p = dev > 128 ? imr_b : imr_a;
-	char imr = p.inb();
-	imr = imr | dev;
-	p.outb(imr);
+	short pin = 1 << dev;
+	char old_imr = imr_a.inb();
+	old_imr = old_imr | pin;
+	imr_a.outb(old_imr);
+	old_imr = imr_b.inb();
+	old_imr = old_imr |( pin >> 8);
+	imr_b.outb(old_imr);
 }
 
 void PIC::ack()

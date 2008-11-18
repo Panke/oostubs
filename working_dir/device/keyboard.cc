@@ -6,5 +6,9 @@
  *                                                                           *
  *---------------------------------------------------------------------------*/
 
-/* ToDo: insert sourcecode */ 
- 
+#include "device/keyboard.h"
+
+void Keyboard::plugin()
+{
+
+}

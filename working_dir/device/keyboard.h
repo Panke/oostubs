@@ -17,7 +17,7 @@
  * This class is a subclass of Gate and implements the interrupt routine used 
  * for the keyboard.
  */
-class Keyboard   {
+class Keyboard :public Gate, Keyboard_Controller {
    
 public:
    
@@ -30,8 +30,8 @@ public:
   /**
    * Method trigger() is called if a keyboard interrupt occurs.
    */
-  
-  /* ToDo: insert sourcecode */ 
+	void trigger();
+
         
 };
 

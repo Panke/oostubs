@@ -24,12 +24,12 @@ private:
 	//
 	// Hier fehlt noch wie das Array initialisiert wird und ob das Array so richtig ist vom Type Gate als Pointer.
 	// TODO Help 
-	Gate *map[64];
+	Gate* map[64];
 
 public:
 	// Konstanten
-	const unsigned int timer;
-	const unsigned int keyboard;
+	static const unsigned int timer = 32;
+	static const unsigned int keyboard = 33;
 
   /**
    * Default constructor of the plugbox initialising the map with default gates.

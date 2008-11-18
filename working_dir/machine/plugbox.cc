@@ -12,7 +12,7 @@
 // Nochmal überdenken, keine Ahnung wo das Erstellt wird.
 extern Panic panic;
 
-Plugbox::Plugbox() : timer(32) , keyboard(33)
+Plugbox::Plugbox()
 {
 	// Für alle Unterbrechungen das Panic-Objekt eintragen.
 	for(int i=0; i<64; i++)
@@ -21,14 +21,14 @@ Plugbox::Plugbox() : timer(32) , keyboard(33)
 	}
 }
 
-void assign(unsigned int slot, Gate& gate)
+void Plugbox::assign(unsigned int slot, Gate& gate)
 {
 	if(0 <= slot && slot <64)
 	{
-		map[slot] = gate;
+		map[slot] = &gate;
 	}
 }
-Gate& report(unsigned int slot)
+Gate& Plugbox::report(unsigned int slot)
 {
-	return map[slot];
+	return *(map[slot]);
 }
