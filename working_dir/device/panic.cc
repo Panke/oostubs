@@ -14,5 +14,5 @@ extern CGA_Stream kout;
 
 void Panic::trigger()
 {
-	kout << "Kernel Panic!" << endl;
+	kout << "Panic triggered!" << endl;
 }

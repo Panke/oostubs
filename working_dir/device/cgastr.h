@@ -18,7 +18,7 @@
  * formats and effects available.
  * CGA_Stream extends the functionality of the classes CGA_Screen and O_Stream.
  */
-class CGA_Stream : public O_Stream, CGA_Screen  {
+class CGA_Stream : public O_Stream, public CGA_Screen  {
 public:
  
   /**

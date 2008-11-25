@@ -17,7 +17,7 @@
  * This class is a subclass of Gate and implements the interrupt routine used 
  * for the keyboard.
  */
-class Keyboard :public Gate, Keyboard_Controller {
+class Keyboard : public Gate, Keyboard_Controller {
    
 public:
    
@@ -25,7 +25,7 @@ public:
    * Method plugin() enables all keyboard interrupts. After calling plugin()
    * interrupts activated by the keyboard are recognised.
    */
-  void plugin ();
+	void plugin ();
 
   /**
    * Method trigger() is called if a keyboard interrupt occurs.

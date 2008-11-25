@@ -18,8 +18,8 @@
 class Gate   {
   
 public:
-  Gate ()   {}
-   
+  Gate ()   {};
+ virtual ~Gate(){ };
   /**
    * Method trigger() is called just after an interrupt occured. It is executed 
    * asynchronous to other activities of the operation system. To enalbe 
@@ -28,7 +28,7 @@ public:
    */
   
   /* ToDo: insert sourcecode */ 
-
+	virtual void trigger() = 0;
 };
 
 #endif

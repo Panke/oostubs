@@ -3,47 +3,25 @@
 #include "machine/cpu.h"
 #include "device/panic.h"
 #include "machine/pic.h"
+#include "machine/plugbox.h"
+#include "device/keyboard.h"
+#include "user/appl.h"
+
 
 CPU cpu;
 CGA_Stream kout;
 Panic panic;
 PIC pic;
-
-void guardian()
-{
-	kout << "Guardian" << endl;
-}
-
+Plugbox plugbox;
+Keyboard keyboard;
+Application application;
 
 int main() 
 {
+	keyboard.plugin();
+	pic.forbid(PIC::all);
+	//pic.forbid(PIC::timer);
 	pic.allow(PIC::keyboard);
-	kout << "Interrupt ist an" << endl;
-	while(true)
-	{
-
-	}
-	/*kout << "Start" <<endl;
-	Keyboard_Controller keycont;	
-	kout << "Init" <<endl;
-	Key down;
-	do
-	{
-		
-		down =keycont.key_hit();
-		if(down.valid())
-		{
-			char outc = (char)down.ascii();
-			if(outc == '\n')
-				kout << endl;
-			else{
-				kout << outc;
-				kout.flush();
-			}
-		}
-	}while(down.ascii() != 'q');
-	kout <<endl;
-	kout << "Ende" << endl;
-	*/
+	application.action();
   return 0;
 }

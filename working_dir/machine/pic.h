@@ -18,7 +18,7 @@
  */
 class PIC {
 public:
-	enum Device {timer = 0, keyboard = 1}; 
+	enum Device {timer = 0, keyboard = 1, all = 0xFF}; 
 	enum {ACK = 0x20};
 	PIC();
   /**
