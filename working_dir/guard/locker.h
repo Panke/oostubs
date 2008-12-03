@@ -17,25 +17,24 @@
  */
 class Locker {
 protected:
-  /** atomar locking variable */
+	bool lock;
   /* ToDo: insert sourcecode */ 
 public:
   /**
    * Default constructor initialising the locking variable (free). 
    */
-  /* ToDo: insert sourcecode */ 
-
+	Locker() : lock(false) {};
   /**
    * Method enter() is called if a critical section is entered and the locking 
    * variable has to be locked.
    */
-  /* ToDo: insert sourcecode */ 
+	inline void enter() {lock = true;};
 
   /**
    * Method retne() is called if a critical section is left and the lockin 
    * variable can be released.
    */
-  /* ToDo: insert sourcecode */ 
+	inline void retne() {lock = false;};
 
   /**
    * Method avail() tests if a critical section is occupied or free.
@@ -43,7 +42,7 @@ public:
    * @return the value of the locking variable indicating if the critical 
    *         section is occupied or free.
    */
-  /* ToDo: insert sourcecode */ 
+	inline bool avail() {return !lock;};
 };
 
 #endif

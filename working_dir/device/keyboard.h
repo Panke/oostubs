@@ -30,8 +30,12 @@ public:
   /**
    * Method trigger() is called if a keyboard interrupt occurs.
    */
-	void trigger();
+//	void trigger();
+	void prologue();
+	void epilogue();
 
+private:
+	Key current_key;
         
 };
 

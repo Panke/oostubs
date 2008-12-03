@@ -9,16 +9,18 @@
 #ifndef __Gate_include__
 #define __Gate_include__
 
+#include "object/chain.h"
+
 /**
  * Class Gate is the superclass of a set of classes that are able to handle 
  * interrupts. Every subclass of Gate has to implement method trigger() that 
  * implements the appropriated behavior of the handler.
  */
 
-class Gate   {
+class Gate : public Chain  {
   
 public:
-  Gate ()   {};
+  //Gate ()   {};
  virtual ~Gate(){ };
   /**
    * Method trigger() is called just after an interrupt occured. It is executed 
@@ -28,7 +30,12 @@ public:
    */
   
   /* ToDo: insert sourcecode */ 
-	virtual void trigger() = 0;
+	virtual void prologue() = 0;
+	virtual void epilogue() {};
+	virtual void queued(bool b) {inQ = b;};
+	virtual bool queued() {return inQ;};
+private:
+	bool inQ;
 };
 
 #endif

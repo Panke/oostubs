@@ -6,6 +6,7 @@
 #include "machine/plugbox.h"
 #include "device/keyboard.h"
 #include "user/appl.h"
+#include "guard/guard.h"
 
 
 CPU cpu;
@@ -15,13 +16,11 @@ PIC pic;
 Plugbox plugbox;
 Keyboard keyboard;
 Application application;
+Guard guard;
 
 int main() 
 {
 	keyboard.plugin();
-	pic.forbid(PIC::all);
-	//pic.forbid(PIC::timer);
-	pic.allow(PIC::keyboard);
 	application.action();
-  return 0;
+	return 0;
 }

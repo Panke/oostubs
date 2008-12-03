@@ -9,15 +9,18 @@
 #ifndef __Guard_include__
 #define __Guard_include__
 
+#include "object/queue.h"
+#include "guard/locker.h"
+#include "guard/gate.h"
 /**
  * Guard enables the operating system to synchroniste actions of interrupt 
  * handlers for critical sections that are secured using the lock of the 
  * Guard object.
  */
 class Guard : public Locker {
-  /** queue of waiting epilogues */
-  /* ToDo: insert sourcecode */ 
 
+  /* ToDo: insert sourcecode */ 
+	Queue epiQ;
   /**
    * Method remove_epilogue() gets the next epilogue from the queue. This method
    * has to be called secured to ensure that the structure of the queue stays
@@ -25,14 +28,13 @@ class Guard : public Locker {
    *
    * @return a pointer to the Gate object implementing the next epilogue.
    */
-  /* ToDo: insert sourcecode */ 
+	Gate* remove_epilogue();
 public:
   /**
    * Method leave() leaves the critical section. Waiting epilogues can be
    * processed now.
    */
-  /* ToDo: insert sourcecode */ 
-
+	void leave();
   /**
    * Method relay() synchronise the procession of an epilogue. If possible the
    * epilogue is processed right away but if the critical section used for the
@@ -40,7 +42,7 @@ public:
    *
    * @param item pointer to the Gate object implementing the epilogue.
    */
-  /* ToDo: insert sourcecode */ 
+	void relay(Gate* item);
 };
 
 #endif

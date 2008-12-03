@@ -9,24 +9,36 @@
 #include "device/keyboard.h"
 #include "machine/plugbox.h"
 #include "device/cgastr.h"
+#include "machine/pic.h"
+#include "guard/guard.h"
 
 extern CGA_Stream kout;
 extern Plugbox plugbox;
+extern PIC pic;
+extern Guard guard;
 
 void Keyboard::plugin()
 {
-	plugbox.assign(Plugbox::keyboard,*this);
+	plugbox.assign(Plugbox::keyboard, *this);
+	pic.allow(PIC::keyboard);
 }
 
-void Keyboard::trigger()
+void Keyboard::prologue()
 {
-	Key keyhit = key_hit();
-	if(keyhit.alt() && keyhit.ctrl() && keyhit.scancode() == 0x53)
+	current_key = key_hit();
+	if(current_key.alt() && current_key.ctrl() 
+	   && current_key.scancode() == 0x53)
 	{
 		reboot();	
 	}
-	if(keyhit.valid())
+	if(current_key.valid())
 	{
-		kout.show(60,10,keyhit.ascii(),15);
+		guard.relay(this);
 	}
+}
+
+void Keyboard::epilogue() 
+{
+	kout.setpos(40,20);
+	kout << (char)current_key.ascii() << endl;
 }

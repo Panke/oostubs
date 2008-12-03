@@ -9,7 +9,8 @@
 /* INCLUDES         */
 #include "user/appl.h"
 #include "device/cgastr.h"
- 
+#include "guard/secure.h"
+
 /* GLOBAL VARIABLES */
 extern CGA_Stream kout;
  
@@ -17,8 +18,12 @@ void Application::action () {
   /* ToDo: insert sourcecode */ 
 	int i = 0;
 	char c = 'a';
-	while(true){
-		kout.show(40,23,c+i%26, 15);	
+	while(true)
+	{
+		Secure secure;
+		//kout.setpos(40,23);
+		kout << (char)(c+i) << endl;	
 		i++;
+		i %= 7;
 	};   
 }

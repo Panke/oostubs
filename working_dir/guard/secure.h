@@ -9,6 +9,9 @@
 #ifndef __Secure_include__
 #define __Secure_include__
 
+#include "guard/guard.h"
+extern Guard guard;
+
 /**
  * Class Secure is used as a simple interface to set and release the 
  * lockvariable we used for securing critical sections of the operating system. 
@@ -20,12 +23,12 @@ public:
   /**
    * Default constructor seting the lock through method guard.enter().
    */
-  /* ToDo: insert sourcecode */ 
+	inline Secure() { guard.enter();};
 
   /**
    * Default destructor unsetting the lock through method guard.leave().
    */
-  /* ToDo: insert sourcecode */ 
+	inline ~Secure() { guard.leave(); };
 };
 
 #endif

@@ -22,9 +22,9 @@ public:
   /**
    * Method trigger() prints an error message and halts the cpu.
    */
-	
+  	
   void trigger();	
-
+  void prologue();
 };
 
 #endif

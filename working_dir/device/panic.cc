@@ -12,7 +12,13 @@
 extern CPU cpu;
 extern CGA_Stream kout;
 
-void Panic::trigger()
+//void Panic::trigger()
+//{
+//	kout << "Panic triggered!" << endl;
+//}
+
+void Panic::prologue()
 {
-	kout << "Panic triggered!" << endl;
+	kout << "prologue() of panic" << endl;
+	cpu.halt();
 }
