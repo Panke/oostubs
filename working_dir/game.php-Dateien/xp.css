@@ -1,0 +1,47 @@
+BODY {
+scrollbar-face-color:62819E;
+scrollbar-highlight-color:62819E;
+scrollbar-3dlight-color:000000;
+scrollbar-darkshadow-color:000000;
+scrollbar-shadow-color:314F6B;
+scrollbar-arrow-color:000000;
+scrollbar-track-color:394A5A;
+}
+
+option, input, textarea, select {
+        background-color: #394a5a;
+color: #ffffff;
+        font-size: 8pt;
+        }
+
+.menu  { color: #ffffff; font-size: 11px; font-family: Arial, Helvetica, Geneva, Swiss, SunSans-Regular }
+
+.rate   { color: #ffffff; font-size: 9px; font-family: Arial, Helvetica, Geneva, Swiss, SunSans-Regular }
+
+.orange  { color: #ffc000; font-size: 13px; font-family: Arial, Helvetica, Geneva, Swiss, SunSans-Regular }
+
+.omenu  { color: #ffc000; font-size: 11px; font-family: Arial, Helvetica, Geneva, Swiss, SunSans-Regular }
+
+.txt { 
+color: #ffffff; 
+font-size: 12px; 
+font-family: Arial, Helvetica, Geneva, Swiss, SunSans-Regular; 
+
+}
+
+.link { 
+color: #62819e; 
+font-size: 12px; 
+font-family: Arial, Helvetica, Geneva, Swiss, SunSans-Regular; 
+
+}
+
+.small  { color: #ffffff; font-size: 9px; font-family: Arial, Helvetica, Geneva, Swiss, SunSans-Regular }
+a  { 
+color: #ffffff; text-decoration: none;
+}
+
+
+a:hover {
+color: #A3C7E8; text-decoration:none;
+ }
