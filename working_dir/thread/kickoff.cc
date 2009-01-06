@@ -13,4 +13,7 @@
  * called directly. It is called throught clever manipulaiton of the stack used
  * by the coroutine. It has to be ensured that this method is never left.
  */
-/* ToDo: insert sourcecode */ 
+void kickoff(void* object)
+{
+	((Coroutine*)object)->action();
+}

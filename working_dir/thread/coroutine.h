@@ -10,6 +10,7 @@
 #define __Coroutine_include__
 
 #include "machine/toc.h"
+//extern void toc_settle(toc*, void*, void (*func)(void*), void*);
 /**
  * Class Coroutine implements the conception of a context switch useing 
  * coroutines. Every coroutine uses its own stack and every coroutine contains 
@@ -21,7 +22,7 @@
 class Coroutine {
 private:
   /** structure toc saving the non-volatile registers (see file 'toc.h'). */
-  /* ToDo: insert sourcecode */ 
+	toc regs;
 public:
   /**
    * Default constructor initialising the stack of the coroutine useing the 
@@ -30,26 +31,26 @@ public:
    * 
    * @param tos pointer to the stack used by this coroutine
    */
-  /* ToDo: insert sourcecode */ 
-
+	Coroutine(void* tos);
+	virtual ~Coroutine();
   /**
    * Method 'go()' activates the first coroutine useing the external method 
    * toc_go(). Afterwards every context switch is triggered by resume().
    */
-  /* ToDo: insert sourcecode */ 
+	void go();
 
   /**
    * Method 'resume()' triggers every context switch after the first coroutine 
    * has been activated by go().
    */
-  /* ToDo: insert sourcecode */ 
+	void resume(Coroutine& next);
 
   /**
    * Method 'action()' implements the real function of the coroutine. But since
    * every coroutine does something differenct this method has to be implemented
    * by a subclass of Coroutine (e.g. Application).
    */
-  /* ToDo: insert sourcecode */ 
+	virtual void action() = 0;
 };
 
 #endif

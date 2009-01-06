@@ -22,7 +22,13 @@
 ; C Prototyp: void toc_go (struct toc* regs);
 
 _toc_go:
-; ToDo: insert sourcecode 
+	mov ecx,[esp+4]
+	mov ebx,[ecx]
+	mov esi,[ecx+esi_offset]
+	mov edi,[ecx+edi_offset]
+	mov ebp,[ecx+ebp_offset]
+	mov esp,[ecx+esp_offset]
+	ret
 
 ; TOC_SWITCH : switch of context, the current registers are saved and the 
 ;              registers of the new 'thread of control' are imported
@@ -31,4 +37,15 @@ _toc_go:
 ;                              struct toc* reg_then);
 
 _toc_switch:
-; ToDo: insert sourcecode 
+	mov ecx,[esp+4]
+	mov [ecx],ebx
+	mov [ecx+esi_offset],esi
+	mov [ecx+edi_offset],edi
+	mov [ecx+ebp_offset],ebp
+	mov [ecx+esp_offset],esp
+	mov ecx,[esp+8]
+	push ecx
+	call _toc_go
+	ret
+
+

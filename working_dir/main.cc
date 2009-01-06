@@ -15,12 +15,22 @@ Panic panic;
 PIC pic;
 Plugbox plugbox;
 Keyboard keyboard;
-Application application;
+//Application application;
 Guard guard;
 
 int main() 
 {
+	cpu.disable_int();
 	keyboard.plugin();
-	application.action();
+	char stack1[400];
+	char stack2[400];
+	Application app1('X', (void*)stack1);
+	Application app2('U', (void*)stack2);
+
+	app1.set_next(app2);
+	app2.set_next(app1);
+
+	app1.go();
+	kout << "Fertig!" << endl;
 	return 0;
 }
