@@ -16,15 +16,19 @@ Gate* Guard::remove_epilogue()
 {
 	cpu.disable_int();
 	Chain* head = epiQ.dequeue();
+	Gate* g = static_cast<Gate*>(head);
 	cpu.enable_int();
-	return static_cast<Gate*>(head);
+	return g;
 }
 
 void Guard::leave() 
 {
 	Gate* current = remove_epilogue();
 	while(current) {
+		current->queued(false);
+		cpu.enable_int();
 		current->epilogue();
+		cpu.disable_int();
 		current = remove_epilogue();
 	}
 	retne();
@@ -35,12 +39,16 @@ void Guard::relay(Gate* item)
 {
 	if(avail()) 
 	{
+		cpu.enable_int();
 		item->epilogue();
 	}
 	else 
 	{
-		cpu.disable_int();
-		epiQ.enqueue(item);
-		cpu.enable_int();
+		if(!item->queued()){
+			cpu.disable_int();
+			item->queued(true);
+			epiQ.enqueue(item);
+			cpu.enable_int();
+		}
 	}
 }
