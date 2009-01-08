@@ -39,8 +39,10 @@ void Guard::relay(Gate* item)
 {
 	if(avail()) 
 	{
+		enter();
 		cpu.enable_int();
 		item->epilogue();
+		leave();
 	}
 	else 
 	{

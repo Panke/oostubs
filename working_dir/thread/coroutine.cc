@@ -7,7 +7,8 @@
  *---------------------------------------------------------------------------*/
 
 #include "thread/coroutine.h"
-
+#include "device/cgastr.h"
+extern CGA_Stream kout;
 // External methods implemented using assembler (see file 'toc.asm'). Those 
 // methods have to be declarated extern "C" to be conform with the c++ standard
 extern "C" {
@@ -20,7 +21,10 @@ extern void kickoff(void*);
 
 Coroutine::Coroutine(void* tos)
 {
+	
+	kout << "Vor Settle" << endl;
 	toc_settle(&(this->regs), tos, kickoff, this);
+	kout << "Nach Settle " << endl;
 }
 Coroutine::~Coroutine(){}
 void Coroutine::go()

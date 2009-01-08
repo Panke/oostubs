@@ -25,10 +25,10 @@ void Application::action () {
 	{
 		{
 		Secure secure;
-		//kout.setpos(40,23);
-		kout << this->zeichen;	
+		kout.setpos(0,2);
+		kout << zeichen;	
 		i++;
-		i %= 25;
+		i %= 24;
 		}
 		if(i==24) {
 			{ Secure secure; kout << endl; }

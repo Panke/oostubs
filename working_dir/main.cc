@@ -20,7 +20,7 @@ Guard guard;
 
 int main() 
 {
-	cpu.disable_int();
+	//cpu.disable_int();
 	keyboard.plugin();
 	char stack1[400];
 	char stack2[400];
@@ -29,7 +29,7 @@ int main()
 
 	app1.set_next(app2);
 	app2.set_next(app1);
-
+	kout << "Vor dem Go" << endl;
 	app1.go();
 	kout << "Fertig!" << endl;
 	return 0;

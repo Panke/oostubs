@@ -26,14 +26,16 @@ void Keyboard::plugin()
 void Keyboard::prologue()
 {
 	current_key = key_hit();
-	if(current_key.alt() && current_key.ctrl() 
-	   && current_key.scancode() == 0x53)
-	{
-		reboot();	
-	}
 	if(current_key.valid())
 	{
-		guard.relay(this);
+		if(current_key.alt() && current_key.ctrl() 
+		   && current_key.scancode() == 0x53)
+		{
+			reboot();	
+		}else{
+			pic.ack();	
+			guard.relay(this);
+		}
 	}
 }
 

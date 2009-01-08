@@ -28,6 +28,5 @@ extern CPU cpu;
  */
 void guardian (unsigned int slot) {
 	plugbox.report(slot).prologue();
-	pic.ack();
 	cpu.enable_int();
 }

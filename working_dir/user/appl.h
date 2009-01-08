@@ -24,7 +24,7 @@ public:
   void set_next(Coroutine& next);
 private:
   char zeichen;
-  Coroutine& next;
+  Coroutine& next; 
 };
 
 #endif
