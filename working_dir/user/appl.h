@@ -8,13 +8,13 @@
 
 #ifndef __application_include__
 #define __application_include__
-#include "thread/coroutine.h"
+#include "thread/entrant.h"
 
 /**
  * This class defines the only application used by oo-StuBS. Every application
  * class is derived from Application.
  */        
-class Application : public Coroutine    {
+class Application : public Entrant    {
 public:
 	Application(char x, int z, void* tos);
   /**
@@ -24,7 +24,6 @@ public:
   void set_next(Coroutine* next);
 private:
   char zeichen;
-  Coroutine* next;
   int zeile;
 };
 

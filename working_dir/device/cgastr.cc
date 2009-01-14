@@ -32,7 +32,6 @@ void CGA_Stream::flush()
 
 		if(out == '\n')
 		{
-			int dif = ((int) start) - ((int) zeiger);
 			print(zeiger,start - zeiger,15);
 			getpos(x,y);
 			x = 0;

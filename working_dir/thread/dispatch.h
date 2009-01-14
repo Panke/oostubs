@@ -8,7 +8,7 @@
 
 #ifndef __dispatch_include__
 #define __dispatch_include__
-
+#include "thread/coroutine.h"
 /**
  * Class Dispatcher administrates the switching of the thread of control. Useing
  * method go() it starts the first coroutine of the system. Afterwards every
@@ -17,33 +17,30 @@
 class Dispatcher {
 private:
   /** pointer to the currently active coroutine */
-  /* ToDo: insert sourcecode */ 
+	Coroutine* c_active;
 public:
   /** Default constructor of the class Displatcher. */
-  /* ToDo: insert sourcecode */ 
-
+	Dispatcher();
   /**
    * The Method 'go()' starts the execution of the first coroutine of the 
    * operating system.
    * 
    * @param first reference of the coroutine that will be executed first.
    */
-  /* ToDo: insert sourcecode */ 
-
+	void go(Coroutine* first);
   /**
    * Method 'dispatch()' switches the thread of control to the specified 
    * coroutine. This method can be called by a coroutine or a scheduler.
    *
    * @param next reference of the coroutine that will be executed next.
    */
-  /* ToDo: insert sourcecode */ 
-
+	void dispatch(Coroutine* next);
   /**
    * Method 'active()' returns the currently active coroutine.
    *
    * @return pointer for the currently active coroutine.
    */
-  /* ToDo: insert sourcecode */ 
+	Coroutine* active();
 };
 
 #endif

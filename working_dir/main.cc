@@ -7,7 +7,7 @@
 #include "device/keyboard.h"
 #include "user/appl.h"
 #include "guard/guard.h"
-
+#include "thread/scheduler.h"
 
 CPU cpu;
 CGA_Stream kout;
@@ -15,6 +15,7 @@ Panic panic;
 PIC pic;
 Plugbox plugbox;
 Keyboard keyboard;
+Scheduler scheduler;
 //Application application;
 Guard guard;
 
@@ -24,15 +25,15 @@ int main()
 	keyboard.plugin();
 	char stack1[400];
 	char stack2[400];
-	Application app1('X',10, (void*)stack1);
-	Application app2('Z',18, (void*)stack2);
+	char stack3[400];
+	Application app1('X',10, (void*)(stack1+400));
+	Application app2('Y',11, (void*)(stack2+400));
+	Application app3('Z',12, (void*)(stack3+400));
 
-	/*void* p1 = &app1;
-	kout << p1 << " " << (int*)p1 + 1 << endl;
-	kout << sizeof(p1) << endl;*/
+	scheduler.ready(&app1);	
+	scheduler.ready(&app2);
+	scheduler.ready(&app3);
 
-	app1.set_next(&app2);
-	app2.set_next(&app1);
-	app1.go();
+	scheduler.schedule();
 	return 0;
 }

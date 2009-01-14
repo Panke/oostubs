@@ -9,8 +9,10 @@
 
 #include "guard/guard.h"
 #include "machine/cpu.h"
+#include "device/cgastr.h"
 
 extern CPU cpu;
+extern CGA_Stream kout;
 
 Gate* Guard::remove_epilogue() 
 {

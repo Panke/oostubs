@@ -10,15 +10,17 @@
 #define __schedule_include__
 
 #include "thread/dispatch.h"
- 
+#include "object/queue.h"
+#include "thread/entrant.h"
+
 /**
  * This class implements a simple scheduler (FIFO) for the operating system 
  * extending the Dispatcher.
  */
-class Scheduler   {
+class Scheduler : public Dispatcher  {
 private:
   /** queue of threads that are ready to be processed */
-  /* ToDo: insert sourcecode */ 
+	Queue queue;
 public:
   Scheduler () {}
 
@@ -26,8 +28,8 @@ public:
    * Method 'schedule()' starts the scheduling by starting the first thread 
    * contained in the queue of the scheduler.
    */
-  /* ToDo: insert sourcecode */ 
-  
+	void schedule();
+
   /**
    * Method 'ready()' inserts the specified thread into the queue of threads 
    * that are ready to be processed.
@@ -35,27 +37,27 @@ public:
    * @param that reference of the thread to be inserted into the queue of 
    *             threads.
    */
-  /* ToDo: insert sourcecode */ 
+	void ready(Entrant* entrant);
 
   /**
    * Method 'exit()' removes the currently active thread from the queue of 
    * thread and resumes with the next thread. If there are no more threads 
    * the scheduler starts an idle loop.
    */
-  /* ToDo: insert sourcecode */ 
+	void exit();
 
   /**
    * Method 'kill()' removes the specified thread from the queue of processes.
    *
    * @param that reference of the thread to be killed.
    */
-  /* ToDo: insert sourcecode */ 
+	void kill(Entrant* entrant);
 
   /**
    * Method 'resume()' uses the scheduling algorithm to get the next thread and
    * resumes with that thread.
    */
-  /* ToDo: insert sourcecode */ 
+	void resume();
 };
 
 #endif
