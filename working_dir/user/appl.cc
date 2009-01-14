@@ -14,7 +14,7 @@
 /* GLOBAL VARIABLES */
 extern CGA_Stream kout;
 
-Application::Application(char x, void* tos) : Coroutine(tos), zeichen(x), next(*this)
+Application::Application(char x,int z, void* tos) : Coroutine(tos), zeichen(x), zeile(z)
 {}
 
 
@@ -25,19 +25,20 @@ void Application::action () {
 	{
 		{
 		Secure secure;
-		kout.setpos(0,2);
-		kout << zeichen;	
+		kout.setpos(0,zeile);
+		kout << zeichen;	 
 		i++;
-		i %= 24;
+		i %= 25;
+		if(i== 24)
+			kout << endl;
 		}
 		if(i==24) {
-			{ Secure secure; kout << endl; }
-			this->resume(this->next);
+			this->resume(*(this->next));
 		}
 	};   
 }
 
-void Application::set_next(Coroutine& _next)
+void Application::set_next(Coroutine* _next)
 {
 	this->next = _next;
 }

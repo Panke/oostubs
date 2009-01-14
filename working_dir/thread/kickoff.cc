@@ -6,8 +6,9 @@
  *                                                                           *
  *---------------------------------------------------------------------------*/
 
-#include "thread/coroutine.h"
- 
+#include "thread/coroutine.h" 
+#include "device/cgastr.h"
+extern CGA_Stream kout;
 /**
  * Method 'kickoff()' is used to start a coroutine initially. This method is not
  * called directly. It is called throught clever manipulaiton of the stack used

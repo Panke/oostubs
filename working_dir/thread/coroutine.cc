@@ -19,12 +19,9 @@ extern "C" {
 
 extern void kickoff(void*);
 
-Coroutine::Coroutine(void* tos)
+Coroutine::Coroutine(void* tos) : regs()
 {
-	
-	kout << "Vor Settle" << endl;
 	toc_settle(&(this->regs), tos, kickoff, this);
-	kout << "Nach Settle " << endl;
 }
 Coroutine::~Coroutine(){}
 void Coroutine::go()

@@ -8,9 +8,12 @@
 
 #include "machine/plugbox.h"
 #include "device/panic.h"
+#include "device/cgastr.h"
+#include "guard/secure.h"
 
 // Nochmal überdenken, keine Ahnung wo das Erstellt wird.
 extern Panic panic;
+extern CGA_Stream kout;
 
 Plugbox::Plugbox()
 {
@@ -30,5 +33,8 @@ void Plugbox::assign(unsigned int slot, Gate& gate)
 }
 Gate& Plugbox::report(unsigned int slot)
 {
+	//{Secure secure;
+	//	kout << slot << endl;
+	//}
 	return *(map[slot]);
 }

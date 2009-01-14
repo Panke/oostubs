@@ -16,15 +16,16 @@
  */        
 class Application : public Coroutine    {
 public:
-	Application(char x, void* tos);
+	Application(char x, int z, void* tos);
   /**
    * This method runs the application defined by this class.
    */
   void action ();
-  void set_next(Coroutine& next);
+  void set_next(Coroutine* next);
 private:
   char zeichen;
-  Coroutine& next; 
+  Coroutine* next;
+  int zeile;
 };
 
 #endif

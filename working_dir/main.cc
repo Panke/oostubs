@@ -24,13 +24,15 @@ int main()
 	keyboard.plugin();
 	char stack1[400];
 	char stack2[400];
-	Application app1('X', (void*)stack1);
-	Application app2('U', (void*)stack2);
+	Application app1('X',10, (void*)stack1);
+	Application app2('Z',18, (void*)stack2);
 
-	app1.set_next(app2);
-	app2.set_next(app1);
-	kout << "Vor dem Go" << endl;
+	/*void* p1 = &app1;
+	kout << p1 << " " << (int*)p1 + 1 << endl;
+	kout << sizeof(p1) << endl;*/
+
+	app1.set_next(&app2);
+	app2.set_next(&app1);
 	app1.go();
-	kout << "Fertig!" << endl;
 	return 0;
 }
