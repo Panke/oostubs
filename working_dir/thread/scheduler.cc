@@ -14,14 +14,18 @@ void Scheduler::ready(Entrant* that)
 
 void Scheduler::schedule()
 {
-	Entrant* ent = (Entrant*) queue.dequeue();
-	if(ent)
-		this->go(ent);
+	if(!active()){
+		Entrant* ent = (Entrant*) queue.dequeue();
+		if(ent)
+			this->go(ent);
+	}
 }
 
 void Scheduler::exit()
 {
-	schedule();
+	Entrant* ent = (Entrant*) queue.dequeue();
+	if(ent)
+		dispatch(ent);
 }
 
 void Scheduler::kill(Entrant* that)
@@ -31,6 +35,9 @@ void Scheduler::kill(Entrant* that)
 
 void Scheduler::resume()
 {
-	queue.enqueue((Entrant*) active());
-	dispatch((Entrant*)queue.dequeue());
+	Entrant* ent = (Entrant*) queue.dequeue();
+	if(ent){
+		queue.enqueue((Entrant*) active());
+		dispatch(ent);
+	}
 }
