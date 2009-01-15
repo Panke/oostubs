@@ -31,6 +31,7 @@ void Application::action () {
 		kout.getpos(x,y);
 		if(y != zeile)
 			kout.setpos(0,zeile);
+		kout.show(60,3,(char)87+zeile,15);
 		kout << zeichen ;	 
 		i++;
 		i %= 25;

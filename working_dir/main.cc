@@ -23,12 +23,12 @@ int main()
 {
 	//cpu.disable_int();
 	keyboard.plugin();
-	char stack1[400];
-	char stack2[400];
-	char stack3[400];
-	Application app1('X',10, (void*)(stack1+400));
-	Application app2('Y',11, (void*)(stack2+400));
-	Application app3('Z',12, (void*)(stack3+400));
+	char stack1[800];
+	char stack2[800];
+	char stack3[800];
+	Application app1('X',10, (void*)(stack1+799));
+	Application app2('Y',11, (void*)(stack2+799));
+	Application app3('Z',12, (void*)(stack3+799));
 
 	scheduler.ready(&app1);	
 	scheduler.ready(&app2);
