@@ -10,13 +10,13 @@
 #include "user/appl.h"
 #include "device/cgastr.h"
 #include "guard/secure.h"
-#include "thread/scheduler.h"
+#include "syscall/guarded_scheduler.h"
 
 /* GLOBAL VARIABLES */
 extern CGA_Stream kout;
-extern Scheduler scheduler;
+extern Guarded_Scheduler scheduler;
 
-Application::Application(char x,int z, void* tos) : Entrant(tos), zeichen(x), zeile(z)
+Application::Application(char x,int z, void* tos) : Thread(tos), zeichen(x), zeile(z)
 {}
 
 
@@ -28,18 +28,17 @@ void Application::action () {
 	{
 		{
 		Secure secure;
-		kout.getpos(x,y);
+		/*kout.getpos(x,y);
 		if(y != zeile)
-			kout.setpos(0,zeile);
+			kout.setpos(0,zeile);*/
 		kout.show(60,3,(char)87+zeile,15);
-		kout << zeichen ;	 
+		//kout << zeichen ;	 
+		kout.show(i,zeile,zeichen,15);
 		i++;
 		i %= 25;
-		kout.flush();
 		}
-		if(i==24) {
-			scheduler.resume();
-		}
+	//	if(i==12)
+	//		scheduler.resume();		
 	};   
 }
 

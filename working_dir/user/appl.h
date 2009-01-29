@@ -8,13 +8,13 @@
 
 #ifndef __application_include__
 #define __application_include__
-#include "thread/entrant.h"
+#include "syscall/thread.h"
 
 /**
  * This class defines the only application used by oo-StuBS. Every application
  * class is derived from Application.
  */        
-class Application : public Entrant    {
+class Application : public Thread{
 public:
 	Application(char x, int z, void* tos);
   /**

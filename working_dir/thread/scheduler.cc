@@ -16,8 +16,9 @@ void Scheduler::schedule()
 {
 	if(!active()){
 		Entrant* ent = (Entrant*) queue.dequeue();
-		if(ent)
+		if(ent){
 			this->go(ent);
+		}
 	}
 }
 

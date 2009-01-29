@@ -22,6 +22,8 @@ void PIC::allow(PIC::Device dev)
 	char old_imr = imr_a.inb();
 	old_imr = old_imr & (~pin);
 	imr_a.outb(old_imr);
+
+
 	old_imr = imr_b.inb();
 	old_imr = old_imr & (~(pin >> 8));
 	imr_b.outb(old_imr);
@@ -34,6 +36,7 @@ void PIC::forbid(PIC::Device dev)
 	char old_imr = imr_a.inb();
 	old_imr = old_imr | pin;
 	imr_a.outb(old_imr);
+
 	old_imr = imr_b.inb();
 	old_imr = old_imr |( pin >> 8);
 	imr_b.outb(old_imr);

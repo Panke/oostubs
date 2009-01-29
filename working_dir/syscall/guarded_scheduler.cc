@@ -2,34 +2,32 @@
  * Operating Systems I                                                       *
  *---------------------------------------------------------------------------*
  *                                                                           *
- *                          D I S P A T C H E R                              *
+ *                   G U A R D E D _ S C H E D U L E R                       *
  *                                                                           *
  *---------------------------------------------------------------------------*/
+#include "syscall/guarded_scheduler.h"
+#include "guard/secure.h"
 
-#include "thread/dispatch.h"
-
-Dispatcher::Dispatcher()
+void Guarded_Scheduler::ready(Thread* that)
 {
-	c_active = 0;
+	Secure secure;
+	Scheduler::ready(that);
 }
 
-void Dispatcher::go(Coroutine* first)
+void Guarded_Scheduler::exit()
 {
-	if(!c_active)
-	{
-		c_active = first;
-		first->go();
-	}
+	Secure secure;
+	Scheduler::exit();
 }
 
-void Dispatcher::dispatch(Coroutine* next)
+void Guarded_Scheduler::kill(Thread* that)
 {
-	Coroutine* runing = c_active;
-	c_active = next;
-	runing->resume(*next);
+	Secure secure;
+	Scheduler::kill(that);
 }
 
-Coroutine* Dispatcher::active()
+void Guarded_Scheduler::resume()
 {
-	return c_active;
+	Secure secure;
+	Scheduler::resume();
 }

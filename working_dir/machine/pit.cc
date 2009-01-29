@@ -2,34 +2,31 @@
  * Operating Systems I                                                       *
  *---------------------------------------------------------------------------*
  *                                                                           *
- *                          D I S P A T C H E R                              *
+ *                                  P I T                                    *
  *                                                                           *
  *---------------------------------------------------------------------------*/
+#include "machine/pit.h"
 
-#include "thread/dispatch.h"
-
-Dispatcher::Dispatcher()
+PIT::PIT(int us) : controlp(0x43) , rwport(0x40)
 {
-	c_active = 0;
+	interval(us);
+}
+void PIT::interval(int us)
+{
+	// 7 6 5 4 3 2 1 0
+	// 0 0 1 1 0 1 0 0  = 52 = 0x34
+	char cw = 52;
+	controlp.outb(0x34);
+	a_interval = us;
+	//Niederwertige Bits
+	rwport.outb(us & 0xff);
+	//Höherwertige Bits
+	rwport.outb(  (us >>  8) );
 }
 
-void Dispatcher::go(Coroutine* first)
+int PIT::interval()
 {
-	if(!c_active)
-	{
-		c_active = first;
-		first->go();
-	}
+	return a_interval;
 }
 
-void Dispatcher::dispatch(Coroutine* next)
-{
-	Coroutine* runing = c_active;
-	c_active = next;
-	runing->resume(*next);
-}
 
-Coroutine* Dispatcher::active()
-{
-	return c_active;
-}

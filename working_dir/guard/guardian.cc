@@ -27,6 +27,8 @@ extern CPU cpu;
  * wobei slot schon die Adresse der Plugbox darstellt
  */
 void guardian (unsigned int slot) {
+	//kout.setpos(0,23);
+	//kout << "Interrupt Nr.:" << slot <<endl;
 	plugbox.report(slot).prologue();
 	cpu.enable_int();
 }

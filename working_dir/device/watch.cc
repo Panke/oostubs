@@ -2,23 +2,36 @@
  * Operating Systems I                                                       *
  *---------------------------------------------------------------------------*
  *                                                                           *
- *                            K I C K O F F                                  *
+ *                              W A T C H                                    *
  *                                                                           *
  *---------------------------------------------------------------------------*/
 
-#include "thread/coroutine.h" 
-#include "device/cgastr.h"
+#include "device/watch.h" 
+#include "machine/plugbox.h"
+#include "machine/pic.h"
 #include "guard/guard.h"
+#include "syscall/guarded_scheduler.h"
+#include "device/cgastr.h"
 
 extern CGA_Stream kout;
 extern Guard guard;
-/**
- * Method 'kickoff()' is used to start a coroutine initially. This method is not
- * called directly. It is called throught clever manipulaiton of the stack used
- * by the coroutine. It has to be ensured that this method is never left.
- */
-void kickoff(void* object)
+extern PIC pic;
+extern Plugbox plugbox;
+extern Guarded_Scheduler scheduler;
+
+void Watch::windup()
 {
-	guard.leave();
-	((Coroutine*)object)->action();
+	plugbox.assign(Plugbox::timer, *this);
+	pic.allow(PIC::timer);
 }
+
+void Watch::prologue()
+{
+	pic.ack();
+	guard.relay(this);	
+}
+
+void Watch::epilogue()
+{
+ 	scheduler.Scheduler::resume();
+}	

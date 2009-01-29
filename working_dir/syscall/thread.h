@@ -2,34 +2,24 @@
  * Operating Systems I                                                       *
  *---------------------------------------------------------------------------*
  *                                                                           *
- *                          D I S P A T C H E R                              *
+ *                             T H R E A D                                   *
  *                                                                           *
  *---------------------------------------------------------------------------*/
 
-#include "thread/dispatch.h"
+#ifndef __thread_include__
+#define __thread_include__
+#include "thread/entrant.h"
+/**
+ * Class Thread implements the userinterface of a thread using an  Entrant.  
+ */
+class Thread : public Entrant    {
+public:
+  /**
+   * Default consturctor for class Thread.
+   *
+   * @param tos pointer to the stack used by this thread
+   */
+  Thread(void* tos) : Entrant(tos){ } 
+};
 
-Dispatcher::Dispatcher()
-{
-	c_active = 0;
-}
-
-void Dispatcher::go(Coroutine* first)
-{
-	if(!c_active)
-	{
-		c_active = first;
-		first->go();
-	}
-}
-
-void Dispatcher::dispatch(Coroutine* next)
-{
-	Coroutine* runing = c_active;
-	c_active = next;
-	runing->resume(*next);
-}
-
-Coroutine* Dispatcher::active()
-{
-	return c_active;
-}
+#endif
